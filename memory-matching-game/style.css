@@ -28,6 +28,8 @@ html {
 }
 
 body {
+  min-height: 100vh;
+  min-width: 100vw;
     background-color: var(--bg-color);
 }
 
@@ -91,16 +93,24 @@ img {
   /* background-color: var(--accent-color); */
 }
 
+.card-container {
+  display: grid;
+  justify-content: center;
+  grid-gap: 16px;
+  grid-template-rows: repeat(2, calc(11rem / 2 * 3));
+  grid-template-columns: repeat(4, 10rem);
+}
+
 .memory-card {
   position: relative;
   width: 10rem;
   height: 17rem;
   margin: 5px;
   border-radius: 10px;
-  border: 1px solid var(--navy-blue);
+  /* border: 1px solid var(--navy-blue); */
   transform: scale(1);
   transform-style: preserve-3d;
-  transition: transform .5s;
+  transition: all 0.5s ease-in-out;
   /* background: linear-gradient(180deg, var(--dark-blue) 43.04%, var(--light-blue) 123.33%); */
 }
 
@@ -131,12 +141,24 @@ img {
   height: 100%;
   position: absolute;
   border-radius: 10px;
-  /* backface-visibility: hidden; */
+  backface-visibility: hidden;
 }
 
-.front-face {
+.memory-card .front-face {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 9.9rem;
   transform: rotateY(180deg);
 }
+
+.memory-card .back-face {
+  background-image: url('./assets/images/tcg/cardback.png');
+  background-position: center center;
+  background-size: cover;
+  backface-visibility: hidden;
+}
+
 
 .game-container .memory-game {
   display: none;
@@ -146,16 +168,6 @@ img {
   display: flex;
 }
 
-.card-container {
-  display: grid;
-  grid-gap: 1;
-  grid-template-rows: repeat(var(--grid-rows), 1fr);
-  grid-template-columns: repeat(var(--grid-cols), 1fr);
-}
-
-.container1 {
-  
-}
 
 .timer {
   font-size: 53px;

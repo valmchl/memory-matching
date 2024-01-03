@@ -1,0 +1,54 @@
+[
+    {
+        "image": "./assets/images/tcg/combat/boom-boom-bakudan.png",
+        "name": "combat-klee"
+    },
+    {
+        "image": "./assets/images/tcg/combat/Featherfall-Judgment.png",
+        "name": "combat-cyno"
+    },
+    {
+        "image": "./assets/images/tcg/combat/I-Got-Your-Back.png",
+        "name": "combat-noelle"
+    },
+    {
+        "image": "./assets/images/tcg/combat/Talent_Yaoyao.png",
+        "name": "combat-yaoyao"
+    },
+    {
+        "image": "./assets/images/tcg/combat/UI_Gcg_CardFace_Modify_Talent_Hutao.png",
+        "name": "combat-hutao"
+    },
+    {
+        "image": "./assets/images/tcg/combat/UI_Gcg_CardFace_Modify_Talent_Kazuha1.png",
+        "name": "combat-kazuha"
+    },
+    {
+        "image": "./assets/images/tcg/combat/UI_Gcg_CardFace_Modify_Talent_Shougun.png",
+        "name": "combat-shogun"
+    },
+    {
+        "image": "./assets/images/tcg/combat/UI_Gcg_CardFace_Modify_Talent_Yae.png",
+        "name": "combat-yaemiko"
+    },
+    {
+        "image": "./assets/images/tcg/combat/UI_Gcg_CardFace_Modify_Talent_Zhongli.png",
+        "name": "combat-zhongli"
+    },
+    {
+        "image": "./assets/images/tcg/combat/UI_Gcg_CardFace_Modify_Constellation_Dori.png",
+        "name": "constellation-dori"
+    },
+    {
+        "image": "./assets/images/tcg/combat/UI_Gcg_CardFace_Modify_Constellation_Feiyan1.png",
+        "name": "constellation-yanfei"
+    },
+    {
+        "image": "./assets/images/tcg/combat/UI_Gcg_CardFace_Modify_Constellation_Qin.png",
+        "name": "constellation-jean"
+    },
+    {
+        "image": "./assets/images/tcg/combat/UI_Gcg_CardFace_Modify_Constellation_Tartaglia.png",
+        "name": "constellation-tartaglia"
+    }
+]
