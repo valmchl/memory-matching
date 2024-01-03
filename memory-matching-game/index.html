@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Genshin Memory Card Game</title>
+  </head>
+  <body>
+    <div id="app"></div>
+        <div class="container flex-center">
+        <header class="heading flex-center">
+            <h1 class="title flex">Miracle Matching</h1>
+            <h4 class="instructions flex">Click and match each card before time runs out!</h3>
+        </header>
+        <!-- // matching card game container START -->
+        <div class="game-container flex-center">
+            <!-- // Easy Difficulty | 8 cards -->
+            <div id="easy" class="memory-game flex-center is-active" data-page="1">
+                <div class="timer">0:30</div>
+
+                <div class="card-container container1 flex-center">
+                  <div class="memory-card flex flip">
+                      <img class="front-face" src="" alt="">
+                      <img class="back-face" src="./assets/images/tcg/cardback.png" alt="Prim Triquetra Symbol">
+                  </div>
+                </div>
+            </div>
+
+            <!-- // Intermmediate Difficulty -->
+            <div id="intermmediate" class="memory-game flex-center" data-page="2">
+                <div class="timer">0:50</div>
+
+                  <div class="memory-card flex flip">
+                    <img class="front-face" src="" alt="">
+                    <img class="back-face" src="./assets/images/tcg/cardback.png" alt="Primordial Triquetra Symbol">
+                  </div>
+            </div>
+
+
+            <!-- // Hard Difficulty -->
+            <div id="hard" class="memory-game flex-center" data-page="3">
+                <div class="timer">1:20</div>
+
+                <div class="memory-card flex flip">
+                    <img class="front-face" src="" alt="">
+                    <img class="back-face" src="./assets/images/tcg/cardback.png" alt="Primordial Triquetra Symbol">
+                </div>
+            </div>
+            <!-- // matching card game container END -->
+
+
+            <!-- // start button -->
+            <button class="start-btn">Start</button>
+
+            <!-- // select difficulty -->
+            <div class="select-difficulty flex">
+                <h2>Select Difficulty</h2>
+                <ul class="options flex">
+                    <li class="level current-level">
+                        <a data-switcher data-tab="1">Easy</a>
+                    </li><span>•</span>
+                    <li class="level">
+                        <a data-switcher data-tab="2">Intermediate</a>
+                    </li><span>•</span>
+                    <li class="level">
+                        <a data-switcher data-tab="3">Hard</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+[
+    {
+        "image": "./assets/images/tcg/archons/UI_Gcg_CardFace_Event_Event_Caoyuzhihui.png",
+        "name": "nahida play"
+    },
+    {
+        "image": "./assets/images/tcg/archons/UI_Gcg_CardFace_Event_Event_Fengyuziyou.png",
+        "name": "venti play"
+    },
+    {
+        "image": "./assets/images/tcg/archons/UI_Gcg_CardFace_Event_Event_Leiyuyongheng.png",
+        "name": "shogun play"
+    },
+    {
+        "image": "./assets/images/tcg/archons/UI_Gcg_CardFace_Event_Event_Yanyuqiyue.png",
+        "name": "zhongli play"
+    }
+]

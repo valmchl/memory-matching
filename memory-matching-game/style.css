@@ -1,0 +1,262 @@
+@font-face {
+    font-family: 'Genshin Typeface';
+    src: url('./assets/fonts/Genshin\ Typeface.ttf') format('truetype');
+}
+
+:root {
+    --bg-color: #EFECE6;
+    --accent-color: #DED6CF;
+    --dark-blue: #233C58;
+    --light-blue: #4C77B1;
+    --navy-blue: #0B082C;
+    --gold: #E3C384;
+
+    --primary-font: 'Genshin Typeface', sans-serif;
+    --grid-cols: 1;
+    --grid-rows: 1;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--primary-font);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+  margin: 0 50px;
+}
+
+/***** Header START *****/
+
+.heading {
+  margin-top: 80px;
+  text-align: center;
+  text-shadow:
+    -2.6px -2.6px 0 var(--accent-color),
+     0   -2.6px 0 var(--accent-color),
+     2.6px -2.6px 0 var(--accent-color),
+     2.6px  0   0 var(--accent-color),
+     2.6px  2.6px 0 var(--accent-color),
+     0    2.6px 0 var(--accent-color),
+    -2.6px  2.6px 0 var(--accent-color),
+    -2.6px  0   0 var(--accent-color);
+}
+
+.title {
+    font-size: 45px;
+    color: var(--light-blue);
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.instructions {
+  font-size: 20px;
+  color: var(--dark-blue);
+}
+
+/***** Header END *****/
+
+/***** Matching Game Container START *****/
+
+.memory-game {
+  flex-wrap: wrap;
+  width: 800px;
+  height: 100%;
+  padding: 5px 0;
+  margin: auto;
+  /* background-color: var(--accent-color); */
+}
+
+.memory-card {
+  position: relative;
+  width: 10rem;
+  height: 17rem;
+  margin: 5px;
+  border-radius: 10px;
+  border: 1px solid var(--navy-blue);
+  transform: scale(1);
+  transform-style: preserve-3d;
+  transition: transform .5s;
+  /* background: linear-gradient(180deg, var(--dark-blue) 43.04%, var(--light-blue) 123.33%); */
+}
+
+.memory-card:active {
+  transform: scale(0.97);
+  transition: transform .2s;
+}
+
+.memory-card.flip {
+  transform: rotateY(180deg);
+}
+
+/* .memory-card::after {
+  content: '';
+  position: absolute;
+  top: 4.5px;
+  left: 4.5px;
+  width: 107px;
+  height: 166px;
+  border: 1.35px var(--gold) solid;
+  border-radius: 6px;
+} */
+
+.front-face,
+.back-face {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 10px;
+  /* backface-visibility: hidden; */
+}
+
+.front-face {
+  transform: rotateY(180deg);
+}
+
+.game-container .memory-game {
+  display: none;
+}
+
+.game-container .memory-game.is-active {
+  display: flex;
+}
+
+.card-container {
+  display: grid;
+  grid-gap: 1;
+  grid-template-rows: repeat(var(--grid-rows), 1fr);
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+}
+
+.container1 {
+  
+}
+
+.timer {
+  font-size: 53px;
+  color: var(--dark-blue);
+  margin: 90px 0 75px 0;
+}
+
+.start-btn {
+  width: 220px;
+  background-color: #fff;
+  padding: 8px 0;
+  margin: 40px 0 60px;
+  font-size: 25px;
+  text-align: center;
+  color: var(--dark-blue);
+  border: 2px var(--dark-blue) solid;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.select-difficulty {
+  font-size: 26px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  white-space: normal; 
+}
+
+.select-difficulty h2 {
+  display: flex;
+  color: var(--navy-blue);
+  margin-bottom: 30px;
+  white-space: normal; 
+  text-shadow:
+    -2.6px -2.6px 0 var(--accent-color),
+     0   -2.6px 0 var(--accent-color),
+     2.6px -2.6px 0 var(--accent-color),
+     2.6px  0   0 var(--accent-color),
+     2.6px  2.6px 0 var(--accent-color),
+     0    2.6px 0 var(--accent-color),
+    -2.6px  2.6px 0 var(--accent-color),
+    -2.6px  0   0 var(--accent-color);
+}
+
+.options {
+  list-style-type: none;
+  align-items: center;
+}
+
+.options span {
+  font-size: 40px;
+  padding: 0 40px;
+}
+
+.options li {
+  cursor: pointer;
+  text-shadow:
+    -2.6px -2.6px 0 var(--accent-color),
+     0   -2.6px 0 var(--accent-color),
+     2.6px -2.6px 0 var(--accent-color),
+     2.6px  0   0 var(--accent-color),
+     2.6px  2.6px 0 var(--accent-color),
+     0    2.6px 0 var(--accent-color),
+    -2.6px  2.6px 0 var(--accent-color),
+    -2.6px  0   0 var(--accent-color);
+}
+
+.options .level a[data-switcher] {
+  color: var(--navy-blue);
+}
+
+.options .level.current-level a[data-switcher] {
+  color: var(--light-blue);
+}
+
+/* Animations */
+
+
+
+/***** Matching Game Container END *****/
+
+/********** Scrollbar *********/
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background: var(--bg-color);  */
+  background: none;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--navy-blue);
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-blue); 
+}

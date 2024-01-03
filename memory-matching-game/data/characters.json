@@ -1,0 +1,138 @@
+[
+    {
+        "image": "./assets/images/tcg/characters/albedo.png",
+        "name": "albedo"
+    },
+    {
+        "image": "./assets/images/tcg/characters/alhaitham.png",
+        "name": "alhaitham"
+    },
+    {
+        "image": "./assets/images/tcg/characters/ayato.png",
+        "name": "ayato"
+    },
+    {
+        "image": "./assets/images/tcg/characters/barbara.png",
+        "name": "barbara"
+    },
+    {
+        "image": "./assets/images/tcg/characters/collei.png",
+        "name": "collei"
+    },
+    {
+        "image": "./assets/images/tcg/characters/cyno.png",
+        "name": "cyno"
+    },
+    {
+        "image": "./assets/images/tcg/characters/dori.png",
+        "name": "dori"
+    },
+    {
+        "image": "./assets/images/tcg/characters/eula.png",
+        "name": "eula"
+    },
+    {
+        "image": "./assets/images/tcg/characters/fischl.png",
+        "name": "fischl"
+    },
+    {
+        "image": "./assets/images/tcg/characters/kaeya.png",
+        "name": "kaeya"
+    },
+    {
+        "image": "./assets/images/tcg/characters/kazuha.png",
+        "name": "kazuha"
+    },
+    {
+        "image": "./assets/images/tcg/characters/keqing.png",
+        "name": "keqing"
+    },
+    {
+        "image": "./assets/images/tcg/characters/klee.png",
+        "name": "klee"
+    },
+    {
+        "image": "./assets/images/tcg/characters/kokomi.png",
+        "name": "kokomi"
+    },
+    {
+        "image": "./assets/images/tcg/characters/layla.png",
+        "name": "layla"
+    },
+    {
+        "image": "./assets/images/tcg/characters/linette.png",
+        "name": "linette"
+    },
+    {
+        "image": "./assets/images/tcg/characters/lyney.png",
+        "name": "lyney"
+    },
+    {
+        "image": "./assets/images/tcg/characters/mona.png",
+        "name": "mona"
+    },
+    {
+        "image": "./assets/images/tcg/characters/nahida.png",
+        "name": "nahida"
+    },
+    {
+        "image": "./assets/images/tcg/characters/nilou.png",
+        "name": "nilou"
+    },
+    {
+        "image": "./assets/images/tcg/characters/ningguang.png",
+        "name": "ningguang"
+    },
+    {
+        "image": "./assets/images/tcg/characters/paimon.png",
+        "name": "paimon"
+    },
+    {
+        "image": "./assets/images/tcg/characters/qiqi.png",
+        "name": "qiqi"
+    },
+    {
+        "image": "./assets/images/tcg/characters/shenhe.png",
+        "name": "shenhe"
+    },
+    {
+        "image": "./assets/images/tcg/characters/shogun.png",
+        "name": "shogun"
+    },
+    {
+        "image": "./assets/images/tcg/characters/tartaglia.png",
+        "name": "tartaglia"
+    },
+    {
+        "image": "./assets/images/tcg/characters/tighnari.png",
+        "name": "tighnari"
+    },
+    {
+        "image": "./assets/images/tcg/characters/venti.png",
+        "name": "venti"
+    },
+    {
+        "image": "./assets/images/tcg/characters/wanderer.png",
+        "name": "wanderer"
+    },
+    {
+        "image": "./assets/images/tcg/characters/xiao.png",
+        "name": "xiao"
+    },
+    {
+        "image": "./assets/images/tcg/characters/yaemiko.png",
+        "name": "yaemiko"
+    },
+    {
+        "image": "./assets/images/tcg/characters/yanfei.png",
+        "name": "yanfei"
+    },
+    {
+        "image": "./assets/images/tcg/characters/yaoyao.png",
+        "name": "yaoyao"
+    },
+    {
+        "image": "./assets/images/tcg/characters/zhongli.png",
+        "name": "zhongli"
+    }
+]
