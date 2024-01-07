@@ -38,6 +38,16 @@ img {
   height: auto;
 }
 
+ hr {
+  border: 0;
+  clear:both;
+  display:block;
+  width: 45%;               
+  background-color:var(--accent-color);
+  height: 0.7px;
+  margin: 50px 0 50px 0;
+ }
+
 .flex {
     display: flex;
 }
@@ -179,7 +189,7 @@ img {
 .timer {
   font-size: 53px;
   color: var(--dark-blue);
-  margin: 90px 0 75px 0;
+  margin: 20px 0 50px 0;
 }
 
 .btn {
@@ -200,7 +210,7 @@ img {
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  white-space: normal; 
+  white-space: normal;
 }
 
 .select-difficulty h2 {
