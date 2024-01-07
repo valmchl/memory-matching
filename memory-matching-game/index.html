@@ -20,17 +20,14 @@
             <div id="easy" class="memory-game flex-center is-active" data-page="1">
                 <div class="timer">0:30</div>
 
-                <div class="card-container container1 flex-center"></div>
+                <div class="card-container-1 flex-center"></div>
             </div>
 
             <!-- // Intermmediate Difficulty -->
             <div id="intermmediate" class="memory-game flex-center" data-page="2">
                 <div class="timer">0:50</div>
 
-                  <div class="memory-card flex flip">
-                    <img class="front-face" src="" alt="">
-                    <img class="back-face" src="./assets/images/tcg/cardback.png" alt="Primordial Triquetra Symbol">
-                  </div>
+                <div class="card-container-2 flex-center"></div>
             </div>
 
 
@@ -38,16 +35,14 @@
             <div id="hard" class="memory-game flex-center" data-page="3">
                 <div class="timer">1:20</div>
 
-                <div class="memory-card flex flip">
-                    <img class="front-face" src="" alt="">
-                    <img class="back-face" src="./assets/images/tcg/cardback.png" alt="Primordial Triquetra Symbol">
-                </div>
+                <div class="card-container-3 flex-center"></div>
             </div>
             <!-- // matching card game container END -->
 
 
             <!-- // start button -->
-            <button class="start-btn">Start</button>
+            <button class="btn">Start</button>
+            <button class="btn reset-btn">Reset</button>
 
             <!-- // select difficulty -->
             <div class="select-difficulty flex">
@@ -67,5 +62,8 @@
         </div>
     </div>
     <script type="module" src="./main.js"></script>
+    <script type="module" src="./easy.js"></script>
+    <script type="module" src="./intermmediate.js"></script>
+    <script type="module" src="./hard.js"></script>
   </body>
 </html>

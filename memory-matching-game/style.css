@@ -42,6 +42,10 @@ img {
     display: flex;
 }
 
+.hidden {
+  display: none;
+}
+
 .flex-center {
     display: flex;
     flex-direction: column;
@@ -93,12 +97,28 @@ img {
   /* background-color: var(--accent-color); */
 }
 
-.card-container {
+.card-container-1 {
   display: grid;
   justify-content: center;
   grid-gap: 16px;
   grid-template-rows: repeat(2, calc(11rem / 2 * 3));
   grid-template-columns: repeat(4, 10rem);
+}
+
+.card-container-2 {
+  display: grid;
+  justify-content: center;
+  grid-gap: 16px;
+  grid-template-rows: repeat(3, calc(11rem / 2 * 3));
+  grid-template-columns: repeat(4, 10rem);
+}
+
+.card-container-3 {
+  display: grid;
+  justify-content: center;
+  grid-gap: 16px;
+  grid-template-rows: repeat(4, calc(11rem / 2 * 3));
+  grid-template-columns: repeat(5, 10rem);
 }
 
 .memory-card {
@@ -107,49 +127,36 @@ img {
   height: 17rem;
   margin: 5px;
   border-radius: 10px;
-  /* border: 1px solid var(--navy-blue); */
-  transform: scale(1);
+  cursor: pointer;
+  /* transform: scale(1); */
   transform-style: preserve-3d;
   transition: all 0.5s ease-in-out;
-  /* background: linear-gradient(180deg, var(--dark-blue) 43.04%, var(--light-blue) 123.33%); */
-}
-
-.memory-card:active {
-  transform: scale(0.97);
-  transition: transform .2s;
 }
 
 .memory-card.flip {
   transform: rotateY(180deg);
 }
 
-/* .memory-card::after {
-  content: '';
-  position: absolute;
-  top: 4.5px;
-  left: 4.5px;
-  width: 107px;
-  height: 166px;
-  border: 1.35px var(--gold) solid;
-  border-radius: 6px;
-} */
+.front-image {
+  width: 10rem;
+  height: 17rem;
+}
 
 .front-face,
 .back-face {
-  display: flex;
-  width: 100%;
-  height: 100%;
   position: absolute;
   border-radius: 10px;
-  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 
 .memory-card .front-face {
-  display: flex;
   justify-content: center;
   align-items: center;
-  width: 9.9rem;
-  transform: rotateY(180deg);
+  object-fit: fill;
+  transform: scale(0.98,0.99);
 }
 
 .memory-card .back-face {
@@ -159,13 +166,13 @@ img {
   backface-visibility: hidden;
 }
 
-
 .game-container .memory-game {
   display: none;
 }
 
 .game-container .memory-game.is-active {
   display: flex;
+  align-content: center;
 }
 
 
@@ -175,7 +182,7 @@ img {
   margin: 90px 0 75px 0;
 }
 
-.start-btn {
+.btn {
   width: 220px;
   background-color: #fff;
   padding: 8px 0;
