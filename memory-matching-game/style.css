@@ -104,7 +104,6 @@ img {
   height: 100%;
   padding: 5px 0;
   margin: auto;
-  /* background-color: var(--accent-color); */
 }
 
 .card-container-1 {
@@ -186,7 +185,7 @@ img {
 }
 
 
-.timer {
+.timerEasy, .timerIntermmediate, .timerHard {
   font-size: 53px;
   color: var(--dark-blue);
   margin: 20px 0 50px 0;
@@ -260,11 +259,10 @@ img {
   color: var(--light-blue);
 }
 
-/* Animations */
-
 
 
 /***** Matching Game Container END *****/
+
 
 /********** Scrollbar *********/
 
@@ -275,7 +273,6 @@ img {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  /* background: var(--bg-color);  */
   background: none;
 }
  
