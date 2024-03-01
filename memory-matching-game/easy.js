@@ -1,35 +1,20 @@
 // Card Game Functions
 const cardContainer = document.querySelector(".card-container-1");
+const easyGame = document.querySelector("#easy");
 let cards = [];
 let matched = 0;
 let firstCard, secondCard;
 let lockBoard = false;
-let timerEasy = document.querySelector(".timerEasy");
-let clockEasy = {
+let clockEasy = document.querySelector(".clockEasy");
+let timerEasy;
+let timeLeft = {
     seconds: 20,
     minutes: 0,
-    hours: 0,
     clearTime: -1
 };
 let interval;
+let startBtn = document.querySelector(".start-btn")
 
-//Start timer
-let startTimer = function () {
-
-    interval = setInterval(function () {
-        timerEasy.innerHTML = `${clockEasy.minutes}:${clockEasy.seconds}`;
-        if (clockEasy.seconds == 0) {
-            if (clockEasy.minutes == 0) {
-                clockEasy.hours--;
-                clockEasy.minutes = 60
-            }
-            clockEasy.minutes--;
-            clockEasy.seconds = 60
-        }
-
-        clockEasy.seconds--
-    }, 1000)
-};
 
 // Fetch archon card data from JSON
 fetch("./data/archons.json")
@@ -70,6 +55,32 @@ function generateCards() {
         cardElement.addEventListener("click", flipCard)
     }
 }
+
+//Start timer
+function gameOver() {
+    clearInterval(timerEasy);
+    alert('Time is up!');
+    startBtn.classList.add('show')
+
+}
+
+function updateTimer() {
+    timeLeft.seconds--
+    if (timeLeft.seconds >= 0) {
+        clockEasy.innerHTML = `0:${timeLeft.seconds}`;
+    } else {
+        gameOver();
+    }
+}
+function start() {
+    timerEasy = setInterval(updateTimer, 1000);
+    updateTimer();
+    startBtn.classList.add('hide')
+}
+
+startBtn.addEventListener('click', () => {
+    start();
+})
 
 //Flips a card and keeps it flipped
 function flipCard() {
@@ -116,6 +127,8 @@ function unflipCards() {
 // Return win condition
 function hasWon() {
     if (matched === 4) {
+        clearInterval(timerEasy);
+        alert('You won!')
         return true;
     } else {
         return false;
@@ -131,19 +144,17 @@ var setMatch = function () {
     matched += 2;
 
     if (hasWon()) {
-        clearInterval(clockEasy.clearTime);
+        clearInterval(timeLeft.clearTime);
         // showModal();
     }
 };
 
-
 function resetTimer() {
-    clockEasy.seconds = 20;
-    clockEasy.minutes = 0;
-    clockEasy.hours = 0;
-    timerEasy.innerHTML = `0:00`;
-    clearInterval(interval)
-    startTimer();
+    timeLeft.seconds = 20;
+    timeLeft.minutes = 0;
+    clockEasy.innerHTML = `0:20`;
+    clearInterval(timerEasy)
+    startBtn.classList.add('show')
 }
 
 //Reset Cards on Board
