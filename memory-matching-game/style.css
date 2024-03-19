@@ -30,7 +30,8 @@ html {
 body {
   min-height: 100vh;
   min-width: 100vw;
-    background-color: var(--bg-color);
+  background-color: var(--bg-color);
+  overflow-x: hidden;
 }
 
 img {
@@ -185,7 +186,7 @@ img {
 }
 
 
-.clockEasy, .clockIntermmediate, .clockHard {
+.timerEasy, .timerIntermmediate, .timerHard {
   font-size: 53px;
   color: var(--dark-blue);
   margin: 20px 0 50px 0;

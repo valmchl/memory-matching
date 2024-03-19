@@ -1,20 +1,24 @@
 // Card Game Functions
-const cardContainer = document.querySelector(".card-container-1");
-const easyGame = document.querySelector("#easy");
+const cardContainer = document.querySelector(".card-container-1")
+const startBtn = document.querySelector(".start-btn")
+const resetBtn = document.querySelector(".reset-btn")
+const easyGame = document.querySelector("#easy")
+const timerEasy = document.querySelector(".timerEasy")
 let cards = [];
 let matched = 0;
 let firstCard, secondCard;
 let lockBoard = false;
-let clockEasy = document.querySelector(".clockEasy");
-let timerEasy;
-let timeLeft = {
-    seconds: 20,
+let time = {
+    seconds: 15,
     minutes: 0,
     clearTime: -1
-};
-let interval;
-let startBtn = document.querySelector(".start-btn")
+}
 
+//Make board unclickable
+cardContainer.classList.add('unclickable')
+
+// Hide 'Reset' Button
+resetBtn.classList.add('hide');
 
 // Fetch archon card data from JSON
 fetch("./data/archons.json")
@@ -22,7 +26,7 @@ fetch("./data/archons.json")
     .then((data) => {
         cards = [...data, ...data];
         shuffleCards();
-        generateCards();
+        updateCards();
     });
 
 // Shuffle cards randomly
@@ -40,7 +44,7 @@ function shuffleCards() {
 }
 
 //Generate cards on game board
-function generateCards() {
+function updateCards() {
     for (let card of cards) {
         const cardElement = document.createElement("div")
         cardElement.classList.add("memory-card", "flex")
@@ -52,42 +56,53 @@ function generateCards() {
             <div class="back-face"></div>
         `;
         cardContainer.appendChild(cardElement);
-        cardElement.addEventListener("click", flipCard)
+        cardElement.addEventListener('click', flipCard)
     }
 }
 
-//Start timer
-function gameOver() {
-    clearInterval(timerEasy);
-    alert('Time is up!');
-    startBtn.classList.add('show')
+//Start Timer
 
-}
+displayTime(time.seconds)
+let countDownTimer = function () {
 
-function updateTimer() {
-    timeLeft.seconds--
-    if (timeLeft.seconds >= 0) {
-        clockEasy.innerHTML = `0:${timeLeft.seconds}`;
-    } else {
-        gameOver();
-    }
-}
-function start() {
-    timerEasy = setInterval(updateTimer, 1000);
-    updateTimer();
+    //Make gameboard clickable
+    cardContainer.classList.remove('unclickable')
+
+    // Toggle start button and reset button when timer is started
     startBtn.classList.add('hide')
+    resetBtn.classList.remove('hide')
+
+    let timer = setInterval(() => {
+        time.seconds--;
+        displayTime(time.seconds)
+        if (time.seconds <= 0 || time.seconds < 1) {
+            clearInterval(timer)
+            cardContainer.classList.add('unclickable')
+        }
+    }, 1000)
+
+    resetBtn.addEventListener('click', resetTimer)
 }
 
-startBtn.addEventListener('click', () => {
-    start();
-})
+startBtn.addEventListener('click', countDownTimer)
+
+function displayTime(second) {
+    const min = Math.floor(second / 60);
+    const sec = Math.floor(second % 60);
+    timerEasy.innerHTML = `${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`
+}
+
+function resetTimer(timer) {
+    clearInterval(timer)
+    time.seconds = 15
+}
 
 //Flips a card and keeps it flipped
 function flipCard() {
     if (lockBoard) return;
     if (this === firstCard) return;
 
-    this.classList.add("flip");
+    this.classList.add('flip');
 
     if (!firstCard) {
         firstCard = this;
@@ -109,8 +124,8 @@ function checkForMatch() {
 
 //Keep cards flipped (when matched)
 function disableCards() {
-    firstCard.removeEventListener("click", flipCard)
-    secondCard.removeEventListener("click", flipCard)
+    firstCard.removeEventListener('click', flipCard)
+    secondCard.removeEventListener('click', flipCard)
 
     resetBoard()
 }
@@ -127,8 +142,6 @@ function unflipCards() {
 // Return win condition
 function hasWon() {
     if (matched === 4) {
-        clearInterval(timerEasy);
-        alert('You won!')
         return true;
     } else {
         return false;
@@ -144,18 +157,11 @@ var setMatch = function () {
     matched += 2;
 
     if (hasWon()) {
-        clearInterval(timeLeft.clearTime);
+        clearInterval(time.clearTime);
         // showModal();
+        alert('You won!');
     }
 };
-
-function resetTimer() {
-    timeLeft.seconds = 20;
-    timeLeft.minutes = 0;
-    clockEasy.innerHTML = `0:20`;
-    clearInterval(timerEasy)
-    startBtn.classList.add('show')
-}
 
 //Reset Cards on Board
 function resetBoard() {
@@ -165,11 +171,13 @@ function resetBoard() {
 }
 
 // Restart Button and Function
-document.querySelector(".reset-btn").addEventListener("click", restart)
+resetBtn.addEventListener("click", restart)
 function restart() {
+    resetTimer();
     resetBoard();
     shuffleCards();
     cardContainer.innerHTML = "";
-    generateCards();
-    resetTimer();
+    updateCards();
+    startBtn.classList.remove('hide')
+    resetBtn.classList.add('hide')
 }
