@@ -305,10 +305,13 @@ img {
 }
 
 /**** Media Queries ****/
-@media only screen and (max-width: 600px) {
+
+/* Mobile */
+@media only screen and (max-width: 480px) {
   .memory-card, .front-image {
-    width: 7rem;
-    height: 12rem;
+    width: 6.4rem;
+    height: 11rem;
+    margin: 2px;
   }
 
   .card-container-1, .card-container-2, .card-container-3 {
@@ -328,5 +331,26 @@ img {
   .card-container-3 {
     grid-template-columns: auto auto auto auto ;
     grid-template-rows: auto auto auto auto auto;
+  }
+}
+
+/* Tablets */
+@media only screen and (max-width: 600px) {
+  .card-container-3 .memory-card, .card-container-3 .front-face .front-image {
+    width: 9rem;
+    height: 15.8rem;
+  }
+
+  .card-container-3 .memory-card {
+    margin: 2px;
+  }
+
+  .card-container-3 {
+    grid-gap: 1px;
+  }
+
+  .card-container-3 {
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto;
   }
 }
