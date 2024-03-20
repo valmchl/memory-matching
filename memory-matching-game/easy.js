@@ -14,11 +14,11 @@ let time = {
     clearTime: -1
 }
 
-//Make board unclickable
-cardContainer.classList.add('unclickable')
+// //Make board unclickable
+// cardContainer.classList.add('unclickable')
 
-// Hide 'Reset' Button
-resetBtn.classList.add('hide');
+// // Hide 'Reset' Button
+// resetBtn.classList.add('hide');
 
 // Fetch archon card data from JSON
 fetch("./data/archons.json")
@@ -62,40 +62,46 @@ function updateCards() {
 
 //Start Timer
 
-displayTime(time.seconds)
-let countDownTimer = function () {
+// displayTime(time.seconds)
+// let countDownTimer = function () {
 
-    //Make gameboard clickable
-    cardContainer.classList.remove('unclickable')
+//     //Make gameboard clickable
+//     cardContainer.classList.remove('unclickable')
 
-    // Toggle start button and reset button when timer is started
-    startBtn.classList.add('hide')
-    resetBtn.classList.remove('hide')
+//     // Toggle start button and reset button when timer is started
+//     startBtn.classList.add('hide')
+//     resetBtn.classList.remove('hide')
 
-    let timer = setInterval(() => {
-        time.seconds--;
-        displayTime(time.seconds)
-        if (time.seconds <= 0 || time.seconds < 1) {
-            clearInterval(timer)
-            cardContainer.classList.add('unclickable')
-        }
-    }, 1000)
+//     //Timer countdown
+//     let timer = setInterval(() => {
+//         time.seconds--;
+//         displayTime(time.seconds)
+//         if (time.seconds <= 0 || time.seconds < 1) {
+//             clearInterval(timer)
 
-    resetBtn.addEventListener('click', resetTimer)
-}
+//             //When time runs out, player is unable to click anymore cards
+//             cardContainer.classList.add('unclickable')
+//         }
+//     }, 1000)
 
-startBtn.addEventListener('click', countDownTimer)
+//     resetBtn.addEventListener('click', resetTimer)
+// }
 
-function displayTime(second) {
-    const min = Math.floor(second / 60);
-    const sec = Math.floor(second % 60);
-    timerEasy.innerHTML = `${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`
-}
+// //When start button is clicked, timer starts counting down
+// startBtn.addEventListener('click', countDownTimer)
 
-function resetTimer(timer) {
-    clearInterval(timer)
-    time.seconds = 15
-}
+// //Display time clock
+// function displayTime(second) {
+//     const min = Math.floor(second / 60);
+//     const sec = Math.floor(second % 60);
+//     timerEasy.innerHTML = `${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`
+// }
+
+// //Resets timer clock
+// function resetTimer(timer) {
+//     clearInterval(timer)
+//     displayTime(time.seconds)
+// }
 
 //Flips a card and keeps it flipped
 function flipCard() {
@@ -173,11 +179,11 @@ function resetBoard() {
 // Restart Button and Function
 resetBtn.addEventListener("click", restart)
 function restart() {
-    resetTimer();
+    //resetTimer();
     resetBoard();
     shuffleCards();
     cardContainer.innerHTML = "";
     updateCards();
-    startBtn.classList.remove('hide')
-    resetBtn.classList.add('hide')
+    // startBtn.classList.remove('hide')
+    // resetBtn.classList.add('hide')
 }
