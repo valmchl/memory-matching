@@ -311,11 +311,10 @@ img {
   .memory-card, .front-image {
     width: 6.4rem;
     height: 11rem;
-    margin: 0;
   }
 
   .card-container-1, .card-container-2, .card-container-3 {
-    grid-gap: 2.5px;
+    grid-gap: 1px;
   }
 
   .card-container-1 {
