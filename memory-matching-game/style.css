@@ -311,11 +311,11 @@ img {
   .memory-card, .front-image {
     width: 6.4rem;
     height: 11rem;
-    margin: 2px;
+    margin: 0;
   }
 
   .card-container-1, .card-container-2, .card-container-3 {
-    grid-gap: 1px;
+    grid-gap: 2.5px;
   }
 
   .card-container-1 {
@@ -332,6 +332,18 @@ img {
     grid-template-columns: auto auto auto auto ;
     grid-template-rows: auto auto auto auto auto;
   }
+
+  .select-difficulty h2 {
+    font-size: 1.8rem;
+  }
+
+  .options li a, .options span {
+    font-size: 1.2rem;
+  }
+
+  .options span {
+    padding: 0 12px;
+  }
 }
 
 /* Tablets */
@@ -341,12 +353,12 @@ img {
     height: 12rem;
   }
 
-  .card-container-3 .memory-card {
+  /* .card-container-3 .memory-card {
     margin: 2px;
-  }
+  } */
 
   .card-container-3 {
-    grid-gap: 1px;
+    grid-gap: 2.5px;
   }
 
   .card-container-3 {
