@@ -337,8 +337,8 @@ img {
 /* Tablets */
 @media only screen and (max-width: 600px) {
   .card-container-3 .memory-card, .card-container-3 .front-face .front-image {
-    width: 9rem;
-    height: 15.8rem;
+    width: 7rem;
+    height: 12rem;
   }
 
   .card-container-3 .memory-card {
