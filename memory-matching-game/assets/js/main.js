@@ -20,7 +20,7 @@ window.onload = () => {
 
 // toggle game page
 function SwitchPage(page_id) {
-    console.log(page_id);
+    // console.log(page_id);
     const current_page = document.querySelector('.game-container .memory-game.is-active');
     current_page.classList.remove('is-active');
 

@@ -36,9 +36,12 @@
             <!-- // Easy Difficulty | 8 cards -->
             <div id="easy" class="memory-game flex-center is-active" data-page="1">
                 <!-- 20 seconds -->
-                <!--<div class="timerEasy"></div>-->
+                <div class="timerEasy">20</div>
 
                 <div class="card-container-1 flex-center"></div>
+                <span>
+                    <button id="resetEasy" class="btn reset-btn">Reset</button>
+                </span>
             </div>
 
             <!-- // Intermmediate Difficulty -->
@@ -47,6 +50,9 @@
                 <!--<div class="timerIntermmediate">0:00</div>-->
 
                 <div class="card-container-2 flex-center"></div>
+                <span>
+                    <button id="resetInter" class="btn reset-btn">Reset</button>
+                </span>
             </div>
 
 
@@ -56,20 +62,23 @@
                 <!--<div class="timerHard">0:00</div>-->
 
                 <div class="card-container-3 flex-center"></div>
+                <span>
+                    <button id="resetHard" class="btn reset-btn">Reset</button>
+                </span>
             </div>
             <!-- // matching card game container END -->
 
 
             <!-- // start button -->
             <!--<button class="btn">Start</button>-->
-            <span>
-            <!--<button class="btn start-btn">Start</button>-->
-            <button class="btn reset-btn">Reset</button></span>
+            <!-- <span>
+                <button class="btn reset-btn">Reset</button>
+            </span> -->
         </div>
     </div>
-    <script type="module" src="./main.js"></script>
-    <script type="module" src="./easy.js"></script>
-    <script type="module" src="./intermmediate.js"></script>
-    <script type="module" src="./hard.js"></script>
+    <script type="module" src="./assets/js/main.js"></script>
+    <script type="module" src="./assets/js/easy.js"></script>
+    <script type="module" src="./assets/js/intermmediate.js"></script>
+    <script type="module" src="./assets/js/hard.js"></script>
   </body>
 </html>

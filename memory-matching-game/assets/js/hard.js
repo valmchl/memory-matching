@@ -1,5 +1,7 @@
 // Card Game Functions
-const cardContainer = document.querySelector(".card-container-3");
+const cardContainerHard = document.querySelector(".card-container-3");
+const resetHardBtn = document.querySelector('#resetHard');
+
 let cards = [];
 let firstCard, secondCard;
 let lockBoard = false;
@@ -37,7 +39,7 @@ function generateCards() {
             </div>
             <div class="back-face"></div>
         `;
-        cardContainer.appendChild(cardElement);
+        cardContainerHard.appendChild(cardElement);
         cardElement.addEventListener("click", flipCard)
     }
 }
@@ -92,6 +94,6 @@ document.querySelector(".reset-btn").addEventListener("click", restart)
 function restart() {
     resetBoard();
     shuffleCards();
-    cardContainer.innerHTML = "";
+    cardContainerHard.innerHTML = "";
     generateCards();
 }
