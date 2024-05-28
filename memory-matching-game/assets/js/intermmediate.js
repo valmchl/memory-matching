@@ -128,9 +128,9 @@ function updateTimer() {
 			timeLeft--
 			timerInt.textContent = timeLeft;
 
-			if (timeLeft <= 5) {
+			if (timeLeft <= 27) {
 			timerInt.style.color = 'red';
-			} else if (timeLeft <= 9) {
+			} else if (timeLeft <= 14) {
 				timerInt.style.color = 'orange';
 			} else {
 				timerInt.style.color = '#233C58';
