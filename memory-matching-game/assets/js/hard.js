@@ -1,11 +1,15 @@
 // Card Game Functions
 const cardContainerHard = document.querySelector(".card-container-3");
+const timerHard = document.querySelector('.timerHard');
 const resetHardBtn = document.querySelector('#resetHard');
 
+let timerInterval;
 let cards = [];
-let firstCard, secondCard;
+let matched = 0;
+let firstCardHard, secondCardHard;
 let lockBoard = false;
-let timeClock1 = 0;
+let gameStarted = false;
+let timeLeft = 60;
 
 fetch("./data/characters.json")
     .then((res) => res.json())
@@ -44,56 +48,121 @@ function generateCards() {
     }
 }
 
+// Format time as mm:ss
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${String(minutes).padStart(2)}:${String(remainingSeconds).padStart(2, '0')}`;
+}
+
+// Starts game and timer
+function startTimer() {
+	if (!gameStarted) {
+		gameStarted = true;
+		// updateTimer(); // to start timer immediately
+		timerHard.textContent = formatTime(timeLeft);
+		timerInterval = setInterval(updateTimer, 1000);
+	}
+}
+
+
+//Flips a card and keeps it flipped
 function flipCard() {
-    if (lockBoard) return;
-    if (this === firstCard) return;
+	startTimer();
+	if (lockBoard) return;
+	if (this === firstCardHard) return;
+	this.classList.add('flip');
 
-    this.classList.add("flip");
+	if (!firstCardHard) {
+		firstCardHard = this;
+		return;
+	}
 
-    if (!firstCard) {
-        firstCard = this;
-        return;
-    }
+	secondCardHard = this;
+	lockBoard = true;
 
-    secondCard = this;
-    lockBoard = true;
-
-    checkForMatch();
+	checkForMatch();
 }
 
-function checkForMatch() {
-    let isMatch = firstCard.dataset.name === secondCard.dataset.name;
-
-    isMatch ? disableCards() : unflipCards();
-}
-
+//Keep cards flipped (when matched)
 function disableCards() {
-    firstCard.removeEventListener("click", flipCard)
-    secondCard.removeEventListener("click", flipCard)
+	firstCardHard.removeEventListener('click', flipCard);
+	secondCardHard.removeEventListener('click', flipCard);
 
-    resetBoard()
+	matched++;
+	resetBoard();
+
+	if (hasWon()) {
+		setTimeout(() => {
+			alert("Congrats! You matched all cards!");
+			restart();
+		}, 500)
+	}
 }
 
+//Unflip cards (when not matched)
 function unflipCards() {
-    setTimeout(() => {
-        firstCard.classList.remove('flip');
-        secondCard.classList.remove('flip');
-        resetBoard();
-    }, 1000);
+	setTimeout(() => {
+		firstCardHard.classList.remove('flip');
+		secondCardHard.classList.remove('flip');
+		resetBoard();
+	}, 700);
+}
+
+// Return win condition
+function hasWon() {
+	return matched === cards.length / 2;
 }
 
 //Reset Cards on Board
 function resetBoard() {
-    firstCard = null;
-    secondCard = null;
-    lockBoard = false;
+	firstCardHard = null;
+	secondCardHard = null;
+	lockBoard = false;
+}
+
+//Checks if selected cards are a match
+function checkForMatch() {
+	let isMatch = firstCardHard.dataset.name === secondCardHard.dataset.name;
+
+	isMatch ? disableCards() : unflipCards();
+}
+
+// Timer
+function updateTimer() {
+
+	if (timeLeft > 0) {
+			timeLeft--
+			timerHard.textContent = formatTime(timeLeft);
+
+			if (timeLeft <= 5) {
+			timerHard.style.color = 'red';
+			} else if (timeLeft <= 9) {
+				timerHard.style.color = 'orange';
+			} else {
+				timerHard.style.color = '#233C58';
+			}
+
+		} else if (timeLeft === 0) {
+			clearInterval(timerInterval);
+			alert("Time is up!");
+			restart();
+		}
 }
 
 // Restart Button and Function
-document.querySelector(".reset-btn").addEventListener("click", restart)
+resetHardBtn.addEventListener('click', restart);
 function restart() {
-    resetBoard();
-    shuffleCards();
-    cardContainerHard.innerHTML = "";
-    generateCards();
+	clearInterval(timerInterval);
+	timeLeft = 80;
+	timerHard.textContent = formatTime(timeLeft);
+	timerHard.style.color = '#233C58';
+	matched = 0;
+	firstCardHard = null;
+	secondCardHard = null;
+	resetBoard();
+	shuffleCards();
+	cardContainerHard.innerHTML = '';
+	gameStarted = false;
+	generateCards();
 }

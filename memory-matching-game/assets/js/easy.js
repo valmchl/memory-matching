@@ -11,11 +11,6 @@ let lockBoard = false;
 let gameStarted = false;
 let timeLeft = 20;
 
-// //Make board unclickable
-// cardContainerEasy.classList.add('unclickable')
-
-// // Hide 'Reset' Button
-// resetEasyBtn.classList.add('hide');
 
 // Fetch archon card data from JSON
 fetch('./data/archons.json')
@@ -61,6 +56,8 @@ function generateCards() {
 function startTimer() {
 	if (!gameStarted) {
 		gameStarted = true;
+		// updateTimer(); // to start timer immediately
+		timerEasy.textContent = timeLeft;
 		timerInterval = setInterval(updateTimer, 1000);
 	}
 }
@@ -89,7 +86,15 @@ function disableCards() {
 	firstCardEasy.removeEventListener('click', flipCard);
 	secondCardEasy.removeEventListener('click', flipCard);
 
+	matched++;
 	resetBoard();
+
+	if (hasWon()) {
+		setTimeout(() => {
+			alert("Congrats! You matched all cards!");
+			restart();
+		}, 500)
+	}
 }
 
 //Unflip cards (when not matched)
@@ -98,32 +103,13 @@ function unflipCards() {
 		firstCardEasy.classList.remove('flip');
 		secondCardEasy.classList.remove('flip');
 		resetBoard();
-	}, 1000);
+	}, 700);
 }
 
 // Return win condition
 function hasWon() {
-	if (matched === cards.length / 2) {
-		return true;
-	} else {
-		return false;
-	}
+	return matched === cards.length / 2;
 }
-
-// Sets currently open cards to the match state, checks win condition
-// var setMatch = function () {
-// 	// cards.forEach(function (card) {
-// 	//     card.addClass("match");
-// 	// });
-// 	cards = [];
-// 	matched += 2;
-
-// 	if (hasWon()) {
-// 		clearInterval(time.clearTime);
-// 		// showModal();
-// 		alert('You won!');
-// 	}
-// };
 
 //Reset Cards on Board
 function resetBoard() {
@@ -137,35 +123,28 @@ function checkForMatch() {
 	let isMatch = firstCardEasy.dataset.name === secondCardEasy.dataset.name;
 
 	isMatch ? disableCards() : unflipCards();
-
-	// if (isMatch) {
-	// 	if (matched === cards.length / 2) {
-	// 		clearInterval(timerInterval);
-	// 		alert("You win!");
-	// 	}
-	// }
 }
 
 // Timer
 function updateTimer() {
-	timerEasy.textContent = timeLeft;
 
-	// Alert pops up when timer shows 0
-	setTimeout(function() {
-		if (timeLeft > 0) {
-			timeLeft--;
-		} else {
+	if (timeLeft > 0) {
+			timeLeft--
+			timerEasy.textContent = timeLeft;
+
+			if (timeLeft <= 5) {
+			timerEasy.style.color = 'red';
+			} else if (timeLeft <= 9) {
+				timerEasy.style.color = 'orange';
+			} else {
+				timerEasy.style.color = '#233C58';
+			}
+
+		} else if (timeLeft === 0) {
 			clearInterval(timerInterval);
 			alert("Time is up!");
+			restart();
 		}
-	}, 1000)
-
-	// if (timeLeft > 0) {
-	// 	timeLeft--;
-	// } else if (timeLeft === 0) {
-	// 	clearInterval(timerInterval);
-	// 	alert("Time is up!");
-	// }
 }
 
 // Restart Button and Function
@@ -174,6 +153,8 @@ function restart() {
 	clearInterval(timerInterval);
 	timeLeft = 20;
 	timerEasy.textContent = timeLeft;
+	timerEasy.style.color = '#233C58';
+	matched = 0;
 	firstCardEasy = null;
 	secondCardEasy = null;
 	resetBoard();
@@ -181,6 +162,4 @@ function restart() {
 	cardContainerEasy.innerHTML = '';
 	gameStarted = false;
 	generateCards();
-	// startBtn.classList.remove('hide')
-	// resetEasyBtn.classList.add('hide')
 }

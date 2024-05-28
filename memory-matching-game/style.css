@@ -189,7 +189,7 @@ img {
 }
 
 
-.timerEasy, .timerIntermmediate, .timerHard {
+.timerEasy, .timerInt, .timerHard {
   font-size: 53px;
   color: var(--dark-blue);
   margin: 20px 0 50px 0;

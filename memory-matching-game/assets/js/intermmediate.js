@@ -1,11 +1,15 @@
 // Card Game Functions
 const cardContainerInter = document.querySelector(".card-container-2");
-const resetInterBtn = document.querySelector('#resetInter');
+const timerInt = document.querySelector('.timerInt');
+const resetIntBtn = document.querySelector('#resetInt');
 
+let timerInterval;
 let cards = [];
+let matched = 0;
 let firstCardInter, secondCardInter;
 let lockBoard = false;
-let timeClock1 = 0;
+let gameStarted = false;
+let timeLeft = 35;
 
 fetch("./data/combat.json")
     .then((res) => res.json())
@@ -44,56 +48,114 @@ function generateCards() {
     }
 }
 
+// Starts game and timer
+function startTimer() {
+	if (!gameStarted) {
+		gameStarted = true;
+		// updateTimer(); // to start timer immediately
+		timerInt.textContent = timeLeft;
+		timerInterval = setInterval(updateTimer, 1000);
+	}
+}
+
+
+//Flips a card and keeps it flipped
 function flipCard() {
-    if (lockBoard) return;
-    if (this === firstCardInter) return;
+	startTimer();
+	if (lockBoard) return;
+	if (this === firstCardInter) return;
+	this.classList.add('flip');
 
-    this.classList.add("flip");
+	if (!firstCardInter) {
+		firstCardInter = this;
+		return;
+	}
 
-    if (!firstCardInter) {
-        firstCardInter = this;
-        return;
-    }
+	secondCardInter = this;
+	lockBoard = true;
 
-    secondCardInter = this;
-    lockBoard = true;
-
-    checkForMatch();
+	checkForMatch();
 }
 
-function checkForMatch() {
-    let isMatch = firstCardInter.dataset.name === secondCardInter.dataset.name;
-
-    isMatch ? disableCards() : unflipCards();
-}
-
+//Keep cards flipped (when matched)
 function disableCards() {
-    firstCardInter.removeEventListener("click", flipCard)
-    secondCardInter.removeEventListener("click", flipCard)
+	firstCardInter.removeEventListener('click', flipCard);
+	secondCardInter.removeEventListener('click', flipCard);
 
-    resetBoard()
+	matched++;
+	resetBoard();
+
+	if (hasWon()) {
+		setTimeout(() => {
+			alert("Congrats! You matched all cards!");
+			restart();
+		}, 500)
+	}
 }
 
+//Unflip cards (when not matched)
 function unflipCards() {
-    setTimeout(() => {
-        firstCardInter.classList.remove('flip');
-        secondCardInter.classList.remove('flip');
-        resetBoard();
-    }, 1000);
+	setTimeout(() => {
+		firstCardInter.classList.remove('flip');
+		secondCardInter.classList.remove('flip');
+		resetBoard();
+	}, 700);
+}
+
+// Return win condition
+function hasWon() {
+	return matched === cards.length / 2;
 }
 
 //Reset Cards on Board
 function resetBoard() {
-    firstCardInter = null;
-    secondCardInter = null;
-    lockBoard = false;
+	firstCardInter = null;
+	secondCardInter = null;
+	lockBoard = false;
+}
+
+//Checks if selected cards are a match
+function checkForMatch() {
+	let isMatch = firstCardInter.dataset.name === secondCardInter.dataset.name;
+
+	isMatch ? disableCards() : unflipCards();
+}
+
+// Timer
+function updateTimer() {
+
+	if (timeLeft > 0) {
+			timeLeft--
+			timerInt.textContent = timeLeft;
+
+			if (timeLeft <= 5) {
+			timerInt.style.color = 'red';
+			} else if (timeLeft <= 9) {
+				timerInt.style.color = 'orange';
+			} else {
+				timerInt.style.color = '#233C58';
+			}
+
+		} else if (timeLeft === 0) {
+			clearInterval(timerInterval);
+			alert("Time is up!");
+			restart();
+		}
 }
 
 // Restart Button and Function
-resetInterBtn.addEventListener("click", restart)
+resetIntBtn.addEventListener('click', restart);
 function restart() {
-    resetBoard();
-    shuffleCards();
-    cardContainerInter.innerHTML = "";
-    generateCards();
+	clearInterval(timerInterval);
+	timeLeft = 35;
+	timerInt.textContent = timeLeft;
+	timerInt.style.color = '#233C58';
+	matched = 0;
+	firstCardInter = null;
+	secondCardInter = null;
+	resetBoard();
+	shuffleCards();
+	cardContainerInter.innerHTML = '';
+	gameStarted = false;
+	generateCards();
 }
