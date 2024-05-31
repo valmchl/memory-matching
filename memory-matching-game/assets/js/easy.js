@@ -9,7 +9,7 @@ let matched = 0;
 let firstCardEasy, secondCardEasy;
 let lockBoard = false;
 let gameStarted = false;
-let timeLeft = 20;
+let timeLeft = 15;
 
 
 // Fetch archon card data from JSON
@@ -134,7 +134,7 @@ function updateTimer() {
 
 			if (timeLeft <= 5) {
 			timerEasy.style.color = 'red';
-			} else if (timeLeft <= 9) {
+			} else if (timeLeft <= 10) {
 				timerEasy.style.color = 'orange';
 			} else {
 				timerEasy.style.color = '#233C58';
@@ -151,7 +151,7 @@ function updateTimer() {
 resetEasyBtn.addEventListener('click', restart);
 function restart() {
 	clearInterval(timerInterval);
-	timeLeft = 20;
+	timeLeft = 15;
 	timerEasy.textContent = timeLeft;
 	timerEasy.style.color = '#233C58';
 	matched = 0;

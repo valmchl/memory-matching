@@ -9,7 +9,7 @@ let matched = 0;
 let firstCardInter, secondCardInter;
 let lockBoard = false;
 let gameStarted = false;
-let timeLeft = 35;
+let timeLeft = 25;
 
 fetch("./data/combat.json")
     .then((res) => res.json())
@@ -128,9 +128,9 @@ function updateTimer() {
 			timeLeft--
 			timerInt.textContent = timeLeft;
 
-			if (timeLeft <= 27) {
+			if (timeLeft <= 7) {
 			timerInt.style.color = 'red';
-			} else if (timeLeft <= 14) {
+			} else if (timeLeft <= 17) {
 				timerInt.style.color = 'orange';
 			} else {
 				timerInt.style.color = '#233C58';
@@ -147,7 +147,7 @@ function updateTimer() {
 resetIntBtn.addEventListener('click', restart);
 function restart() {
 	clearInterval(timerInterval);
-	timeLeft = 35;
+	timeLeft = 25;
 	timerInt.textContent = timeLeft;
 	timerInt.style.color = '#233C58';
 	matched = 0;

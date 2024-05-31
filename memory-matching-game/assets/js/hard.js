@@ -9,7 +9,7 @@ let matched = 0;
 let firstCardHard, secondCardHard;
 let lockBoard = false;
 let gameStarted = false;
-let timeLeft = 60;
+let timeLeft = 45;
 
 fetch("./data/characters.json")
     .then((res) => res.json())
@@ -49,18 +49,19 @@ function generateCards() {
 }
 
 // Format time as mm:ss
-function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${String(minutes).padStart(2)}:${String(remainingSeconds).padStart(2, '0')}`;
-}
+// function formatTime(seconds) {
+//     const minutes = Math.floor(seconds / 60);
+//     const remainingSeconds = seconds % 60;
+//     return `${String(minutes).padStart(2)}:${String(remainingSeconds).padStart(2, '0')}`;
+// }
+// timerHard.textContent = formatTime(timeLeft)
 
 // Starts game and timer
 function startTimer() {
 	if (!gameStarted) {
 		gameStarted = true;
 		// updateTimer(); // to start timer immediately
-		timerHard.textContent = formatTime(timeLeft);
+		timerHard.textContent = timeLeft;
 		timerInterval = setInterval(updateTimer, 1000);
 	}
 }
@@ -68,7 +69,7 @@ function startTimer() {
 
 //Flips a card and keeps it flipped
 function flipCard() {
-	startTimer();
+	startTimer(); // Start timer when card is flipped
 	if (lockBoard) return;
 	if (this === firstCardHard) return;
 	this.classList.add('flip');
@@ -92,6 +93,7 @@ function disableCards() {
 	matched++;
 	resetBoard();
 
+	// Alert if all cards art matched
 	if (hasWon()) {
 		setTimeout(() => {
 			alert("Congrats! You matched all cards!");
@@ -114,30 +116,31 @@ function hasWon() {
 	return matched === cards.length / 2;
 }
 
-//Reset Cards on Board
+// Reset cards on board
 function resetBoard() {
 	firstCardHard = null;
 	secondCardHard = null;
 	lockBoard = false;
 }
 
-//Checks if selected cards are a match
+// Checks if selected cards are a match
 function checkForMatch() {
 	let isMatch = firstCardHard.dataset.name === secondCardHard.dataset.name;
 
 	isMatch ? disableCards() : unflipCards();
 }
 
-// Timer
+// Countdown timer
 function updateTimer() {
 
 	if (timeLeft > 0) {
 			timeLeft--
-			timerHard.textContent = formatTime(timeLeft);
+			timerHard.textContent = timeLeft;
 
-			if (timeLeft <= 30) {
+			// Change color of text based on time left
+			if (timeLeft <= 15) {
 			timerHard.style.color = 'red';
-			} else if (timeLeft <= 10) {
+			} else if (timeLeft <= 30) {
 				timerHard.style.color = 'orange';
 			} else {
 				timerHard.style.color = '#233C58';
@@ -154,8 +157,8 @@ function updateTimer() {
 resetHardBtn.addEventListener('click', restart);
 function restart() {
 	clearInterval(timerInterval);
-	timeLeft = 80;
-	timerHard.textContent = formatTime(timeLeft);
+	timeLeft = 45;
+	timerHard.textContent = timeLeft;
 	timerHard.style.color = '#233C58';
 	matched = 0;
 	firstCardHard = null;
