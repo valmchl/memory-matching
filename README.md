@@ -1,7 +1,7 @@
 # Memory Card Matching Game
 
 A timed matching card game with varying difficulty levels to test your memory!
-Work-In-Progress: [Click Here](https://vgmichel.github.io/memory-matching/memory-matching-game/)
++ Work-In-Progress: [Click Here](https://vgmichel.github.io/memory-matching/memory-matching-game/)
 
 ## Difficulty Levels
 + **Easy Level:** 4 x 2 board, to match all in 15 seconds
@@ -10,4 +10,4 @@ Work-In-Progress: [Click Here](https://vgmichel.github.io/memory-matching/memory
 
 ## Demo
 
-Insert gif or link to demo
+![demo gif](https://github.com/VGMichel/memory-matching/blob/main/memory-matching-game/demo.gif)
