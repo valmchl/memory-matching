@@ -100,10 +100,9 @@ function disableCards() {
 
 	// Alert if all cards art matched
 	if (hasWon()) {
+		clearInterval(timerInterval);
 		setTimeout(() => {
 			showWinModal();
-			// alert("Congrats! You matched all cards!");
-			restart();
 		}, 500)
 	}
 }
@@ -156,7 +155,6 @@ function updateTimer() {
 			// If time runs out
 			clearInterval(timerInterval);
 			showTimeUpModal();
-			restart();
 		}
 }
 

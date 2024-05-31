@@ -69,6 +69,8 @@ img {
 .container {
   margin: 0 50px;
 }
+
+
 /***** Modal Styles *****/
 .modal {
     display: none; 
@@ -104,6 +106,7 @@ img {
     text-decoration: none;
     cursor: pointer;
 }
+/***** End Modal Styles *****/
 
 /***** Header START *****/
 
@@ -317,6 +320,11 @@ img {
 
 
 /***** Matching Game Container END *****/
+
+.footer {
+  padding-bottom: 20px;
+  font-size: 12px;
+}
 
 
 /********** Scrollbar *********/
