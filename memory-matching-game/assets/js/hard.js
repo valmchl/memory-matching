@@ -1,3 +1,4 @@
+
 // Card Game Functions
 const cardContainerHard = document.querySelector(".card-container-3");
 const timerHard = document.querySelector('.timerHard');
@@ -10,6 +11,10 @@ let firstCardHard, secondCardHard;
 let lockBoard = false;
 let gameStarted = false;
 let timeLeft = 45;
+
+// Imports
+import { initModals } from "./modals.js";
+const { showTimeUpModal, showWinModal, closeModals } = initModals();
 
 fetch("./data/characters.json")
     .then((res) => res.json())
@@ -96,7 +101,8 @@ function disableCards() {
 	// Alert if all cards art matched
 	if (hasWon()) {
 		setTimeout(() => {
-			alert("Congrats! You matched all cards!");
+			showWinModal();
+			// alert("Congrats! You matched all cards!");
 			restart();
 		}, 500)
 	}
@@ -139,7 +145,7 @@ function updateTimer() {
 
 			// Change color of text based on time left
 			if (timeLeft <= 15) {
-			timerHard.style.color = 'red';
+				timerHard.style.color = 'red';
 			} else if (timeLeft <= 30) {
 				timerHard.style.color = 'orange';
 			} else {
@@ -147,8 +153,9 @@ function updateTimer() {
 			}
 
 		} else if (timeLeft === 0) {
+			// If time runs out
 			clearInterval(timerInterval);
-			alert("Time is up!");
+			showTimeUpModal();
 			restart();
 		}
 }
@@ -168,4 +175,5 @@ function restart() {
 	cardContainerHard.innerHTML = '';
 	gameStarted = false;
 	generateCards();
+	closeModals();
 }

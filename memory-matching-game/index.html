@@ -8,7 +8,24 @@
     <title>Genshin Memory Card Game</title>
   </head>
   <body>
-    <div id="app"></div>
+        <!-- Win Modal  -->
+        <div id="winModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="winClose">X</span>
+                <p>Congratulations you matched all cards!</p>
+                <button class="win-restart">Restart</button>
+            </div>
+        </div>
+
+        <!-- Time Up Modal -->
+        <div id="timeUpModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="timeUpClose">X</span>
+                <p>Time's up!</p>
+                <button class="timeup-restart">Restart</button>
+            </div>
+        </div>
+
         <div class="container flex-center">
         <header class="heading flex-center">
             <h1 class="title flex">Miracle Matching</h1>
@@ -76,6 +93,7 @@
             </span> -->
         </div>
     </div>
+    <script type="module" src="./assets/js/modals.js"></script>
     <script type="module" src="./assets/js/main.js"></script>
     <script type="module" src="./assets/js/easy.js"></script>
     <script type="module" src="./assets/js/intermmediate.js"></script>

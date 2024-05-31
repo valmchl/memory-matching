@@ -11,6 +11,9 @@ let lockBoard = false;
 let gameStarted = false;
 let timeLeft = 15;
 
+// Imports
+import { initModals } from "./modals.js";
+const { showTimeUpModal, showWinModal, closeModals } = initModals();
 
 // Fetch archon card data from JSON
 fetch('./data/archons.json')
@@ -90,9 +93,10 @@ function disableCards() {
 	resetBoard();
 
 	if (hasWon()) {
+		clearInterval(timerInterval);
 		setTimeout(() => {
-			alert("Congrats! You matched all cards!");
-			restart();
+			// alert("Congrats! You matched all cards!");
+			showWinModal();
 		}, 500)
 	}
 }
@@ -142,7 +146,8 @@ function updateTimer() {
 
 		} else if (timeLeft === 0) {
 			clearInterval(timerInterval);
-			alert("Time is up!");
+			showTimeUpModal();
+			// alert("Time is up!");
 			restart();
 		}
 }
@@ -162,4 +167,7 @@ function restart() {
 	cardContainerEasy.innerHTML = '';
 	gameStarted = false;
 	generateCards();
+	closeModals();
 }
+
+window.restart = restart;

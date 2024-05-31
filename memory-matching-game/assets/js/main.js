@@ -18,7 +18,7 @@ window.onload = () => {
     }
 }
 
-// toggle game page
+// Toggle difficulty page
 function SwitchPage(page_id) {
     // console.log(page_id);
     const current_page = document.querySelector('.game-container .memory-game.is-active');
