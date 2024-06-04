@@ -164,7 +164,6 @@ function restart() {
 	cardContainerEasy.innerHTML = '';
 	gameStarted = false;
 	generateCards();
-	closeModals();
 }
 
 window.restart = restart;

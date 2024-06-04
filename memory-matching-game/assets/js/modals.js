@@ -51,7 +51,7 @@ function initModals() {
 
     // Close modals if clicking outside of the modal content
     window.addEventListener('click', (event) => {
-        if (event.target === timeUpModalModal) {
+        if (event.target === timeUpModal) {
             closeModals();
         } else if (event.target === winModal) {
             closeModals();
