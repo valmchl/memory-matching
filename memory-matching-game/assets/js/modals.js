@@ -21,42 +21,32 @@ function initModals() {
     }
 
     // Close modals
-    function closeModals() {
-        timeUpModal.style.display = 'none';
-        winModal.style.display = 'none';
+    function closeModals(restartCallback) {
+		timeUpModal.style.display = 'none';
+		winModal.style.display = 'none';
         
-        if(typeof restart === 'function') {
-            restart();
-        }
-    }
+		if (typeof restartCallback === 'function') {
+			restartCallback();
+		}
+	}
 
     // Event listeners
-    timeUpClose.addEventListener('click', closeModals);
-    winClose.addEventListener('click', closeModals);
+	timeUpClose.addEventListener('click', () => closeModals(window.currentRestart));
+	winClose.addEventListener('click', () => closeModals(window.currentRestart));
 
-    timeUpRestart.addEventListener('click', () => {
-        closeModals();
-        if(typeof restart === 'function') {
-            restart();
-        }
-    });
+	timeUpRestart.addEventListener('click', () => {
+		closeModals(window.currentRestart);
+	});
 
-    winRestart.addEventListener('click', () => {
-        closeModals();
+	winRestart.addEventListener('click', () => {
+		closeModals(window.currentRestart);
+	});
 
-        if(typeof restart === 'function') {
-            restart();
-        }
-    });
-
-    // Close modals if clicking outside of the modal content
-    window.addEventListener('click', (event) => {
-        if (event.target === timeUpModal) {
-            closeModals();
-        } else if (event.target === winModal) {
-            closeModals();
-        }
-    });
+	window.addEventListener('click', (event) => {
+		if (event.target === timeUpModal || event.target === winModal) {
+			closeModals(window.currentRestart);
+		}
+	});
 
     return {
         showTimeUpModal,

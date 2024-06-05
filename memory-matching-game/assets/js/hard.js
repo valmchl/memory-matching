@@ -4,41 +4,41 @@ const cardContainerHard = document.querySelector(".card-container-3");
 const timerHard = document.querySelector('.timerHard');
 const resetHardBtn = document.querySelector('#resetHard');
 
-let timerInterval;
-let cards = [];
+let timerIntervalHard;
+let cardsHard = [];
 let matched = 0;
 let firstCardHard, secondCardHard;
 let lockBoard = false;
-let gameStarted = false;
-let timeLeft = 45;
+let gameStartedHard = false;
+let timeLeftHard = 45;
 
 // Imports
 import { initModals } from "./modals.js";
-const { showTimeUpModal, showWinModal, closeModals } = initModals();
+const { showTimeUpModal, showWinModal } = initModals();
 
 fetch("./data/characters.json")
     .then((res) => res.json())
     .then((data) => {
-        cards = [...data, ...data];
+        cardsHard = [...data, ...data];
         shuffleCards();
         generateCards();
     });
 
 function shuffleCards() {
-    let currentIndex = cards.length,
+    let currentIndex = cardsHard.length,
         randomIndex,
         temporaryValue;
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex)
         currentIndex -= 1
-        temporaryValue = cards[currentIndex]
-        cards[currentIndex] = cards[randomIndex]
-        cards[randomIndex] = temporaryValue
+        temporaryValue = cardsHard[currentIndex]
+        cardsHard[currentIndex] = cardsHard[randomIndex]
+        cardsHard[randomIndex] = temporaryValue
     }
 }
 
 function generateCards() {
-    for (let card of cards) {
+    for (let card of cardsHard) {
         const cardElement = document.createElement("div")
         cardElement.classList.add("memory-card", "flex")
         cardElement.setAttribute("data-name", card.name)
@@ -59,22 +59,21 @@ function generateCards() {
 //     const remainingSeconds = seconds % 60;
 //     return `${String(minutes).padStart(2)}:${String(remainingSeconds).padStart(2, '0')}`;
 // }
-// timerHard.textContent = formatTime(timeLeft)
+// timerHard.textContent = formatTime(timeLeftHard)
 
 // Starts game and timer
 function startTimer() {
-	if (!gameStarted) {
-		gameStarted = true;
-		// updateTimer(); // to start timer immediately
-		timerHard.textContent = timeLeft;
-		timerInterval = setInterval(updateTimer, 1000);
+	if (!gameStartedHard) {
+		gameStartedHard = true;
+		timerHard.textContent = timeLeftHard;
+		timerIntervalHard = setInterval(updateTimer, 1000);
 	}
 }
 
 
 //Flips a card and keeps it flipped
 function flipCard() {
-	startTimer(); // Start timer when card is flipped
+	startTimer();
 	if (lockBoard) return;
 	if (this === firstCardHard) return;
 	this.classList.add('flip');
@@ -98,11 +97,12 @@ function disableCards() {
 	matched++;
 	resetBoard();
 
-	// Alert if all cards art matched
+	// Alert if all cards are matched
 	if (hasWon()) {
-		clearInterval(timerInterval);
+		clearInterval(timerIntervalHard);
 		setTimeout(() => {
 			showWinModal();
+			window.currentRestart = restart;
 		}, 500)
 	}
 }
@@ -118,7 +118,7 @@ function unflipCards() {
 
 // Return win condition
 function hasWon() {
-	return matched === cards.length / 2;
+	return matched === cardsHard.length / 2;
 }
 
 // Reset cards on board
@@ -138,32 +138,33 @@ function checkForMatch() {
 // Countdown timer
 function updateTimer() {
 
-	if (timeLeft > 0) {
-			timeLeft--
-			timerHard.textContent = timeLeft;
+	if (timeLeftHard > 0) {
+		timeLeftHard--
+		timerHard.textContent = timeLeftHard;
 
-			// Change color of text based on time left
-			if (timeLeft <= 15) {
-				timerHard.style.color = 'red';
-			} else if (timeLeft <= 30) {
-				timerHard.style.color = 'orange';
-			} else {
-				timerHard.style.color = '#233C58';
-			}
-
-		} else if (timeLeft === 0) {
-			// If time runs out
-			clearInterval(timerInterval);
-			showTimeUpModal();
+		// Change color of text based on time left
+		if (timeLeftHard <= 15) {
+			timerHard.style.color = 'red';
+		} else if (timeLeftHard <= 30) {
+			timerHard.style.color = 'orange';
+		} else {
+			timerHard.style.color = '#233C58';
 		}
+
+	} else if (timeLeftHard === 0) {
+		// If time runs out
+		clearInterval(timerIntervalHard);
+		showTimeUpModal();
+		window.currentRestart = restart;
+	}
 }
 
 // Restart Button and Function
 resetHardBtn.addEventListener('click', restart);
 function restart() {
-	clearInterval(timerInterval);
-	timeLeft = 45;
-	timerHard.textContent = timeLeft;
+	clearInterval(timerIntervalHard);
+	timeLeftHard = 45;
+	timerHard.textContent = timeLeftHard;
 	timerHard.style.color = '#233C58';
 	matched = 0;
 	firstCardHard = null;
@@ -171,7 +172,8 @@ function restart() {
 	resetBoard();
 	shuffleCards();
 	cardContainerHard.innerHTML = '';
-	gameStarted = false;
+	gameStartedHard = false;
 	generateCards();
-	closeModals();
 }
+
+window.currentRestart = restart;

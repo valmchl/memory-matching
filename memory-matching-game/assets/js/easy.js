@@ -1,15 +1,15 @@
 // Card Game Functions
 const cardContainerEasy = document.querySelector('.card-container-1');
-const resetEasyBtn = document.querySelector('#resetEasy');
-const easyGame = document.querySelector('#easy');
 const timerEasy = document.querySelector('.timerEasy');
-let timerInterval;
-let cards = [];
-let matched = 0;
+const resetEasyBtn = document.querySelector('#resetEasy');
+
+let timerIntervalEasy;
+let cardsEasy = [];
+let matchedEasy = 0;
 let firstCardEasy, secondCardEasy;
 let lockBoard = false;
-let gameStarted = false;
-let timeLeft = 15;
+let gameStartedEasy = false;
+let timeLeftEasy = 15;
 
 // Imports
 import { initModals } from "./modals.js";
@@ -19,28 +19,28 @@ const { showTimeUpModal, showWinModal, closeModals } = initModals();
 fetch('./data/archons.json')
 	.then((res) => res.json())
 	.then((data) => {
-		cards = [...data, ...data];
+		cardsEasy = [...data, ...data];
 		shuffleCards();
 		generateCards();
 	});
 
 // Shuffle cards randomly
 function shuffleCards() {
-	let currentIndex = cards.length,
+	let currentIndex = cardsEasy.length,
 		randomIndex,
 		temporaryValue;
 	while (currentIndex !== 0) {
 		randomIndex = Math.floor(Math.random() * currentIndex);
 		currentIndex -= 1;
-		temporaryValue = cards[currentIndex];
-		cards[currentIndex] = cards[randomIndex];
-		cards[randomIndex] = temporaryValue;
+		temporaryValue = cardsEasy[currentIndex];
+		cardsEasy[currentIndex] = cardsEasy[randomIndex];
+		cardsEasy[randomIndex] = temporaryValue;
 	}
 }
 
-//Generate cards on game board
+// Generate cards on game board
 function generateCards() {
-	for (let card of cards) {
+	for (let card of cardsEasy) {
 		const cardElement = document.createElement('div');
 		cardElement.classList.add('memory-card', 'flex');
 		cardElement.setAttribute('data-name', card.name);
@@ -57,16 +57,14 @@ function generateCards() {
 
 // Starts game and timer
 function startTimer() {
-	if (!gameStarted) {
-		gameStarted = true;
-		// updateTimer(); // to start timer immediately
-		timerEasy.textContent = timeLeft;
-		timerInterval = setInterval(updateTimer, 1000);
+	if (!gameStartedEasy) {
+		gameStartedEasy = true;
+		timerEasy.textContent = timeLeftEasy;
+		timerIntervalEasy = setInterval(updateTimer, 1000);
 	}
 }
 
-
-//Flips a card and keeps it flipped
+// Flips a card and keeps it flipped
 function flipCard() {
 	startTimer();
 	if (lockBoard) return;
@@ -84,23 +82,24 @@ function flipCard() {
 	checkForMatch();
 }
 
-//Keep cards flipped (when matched)
+// Keep cards flipped (when matched)
 function disableCards() {
 	firstCardEasy.removeEventListener('click', flipCard);
 	secondCardEasy.removeEventListener('click', flipCard);
 
-	matched++;
+	matchedEasy++;
 	resetBoard();
 
 	if (hasWon()) {
-		clearInterval(timerInterval);
+		clearInterval(timerIntervalEasy);
 		setTimeout(() => {
+			window.currentRestart = restart;
 			showWinModal();
-		}, 500)
+		}, 500);
 	}
 }
 
-//Unflip cards (when not matched)
+// Unflip cards (when not matched)
 function unflipCards() {
 	setTimeout(() => {
 		firstCardEasy.classList.remove('flip');
@@ -111,59 +110,59 @@ function unflipCards() {
 
 // Return win condition
 function hasWon() {
-	return matched === cards.length / 2;
+	return matchedEasy === cardsEasy.length / 2;
 }
 
-//Reset Cards on Board
+// Reset Cards on Board
 function resetBoard() {
 	firstCardEasy = null;
 	secondCardEasy = null;
 	lockBoard = false;
 }
 
-//Checks if selected cards are a match
+// Checks if selected cards are a match
 function checkForMatch() {
 	let isMatch = firstCardEasy.dataset.name === secondCardEasy.dataset.name;
 
 	isMatch ? disableCards() : unflipCards();
 }
 
-// Timer
+// Countdown timer
 function updateTimer() {
+	if (timeLeftEasy > 0) {
+		timeLeftEasy--;
+		timerEasy.textContent = timeLeftEasy;
 
-	if (timeLeft > 0) {
-			timeLeft--
-			timerEasy.textContent = timeLeft;
-
-			if (timeLeft <= 5) {
+		// Change color of text based on time left
+		if (timeLeftEasy <= 5) {
 			timerEasy.style.color = 'red';
-			} else if (timeLeft <= 10) {
-				timerEasy.style.color = 'orange';
-			} else {
-				timerEasy.style.color = '#233C58';
-			}
-
-		} else if (timeLeft === 0) {
-			clearInterval(timerInterval);
-			showTimeUpModal();
+		} else if (timeLeftEasy <= 10) {
+			timerEasy.style.color = 'orange';
+		} else {
+			timerEasy.style.color = '#233C58';
 		}
+	} else if (timeLeftEasy === 0) {
+		clearInterval(timerIntervalEasy);
+		window.currentRestart = restart;
+		showTimeUpModal();
+	}
 }
 
 // Restart Button and Function
 resetEasyBtn.addEventListener('click', restart);
 function restart() {
-	clearInterval(timerInterval);
-	timeLeft = 15;
-	timerEasy.textContent = timeLeft;
+	clearInterval(timerIntervalEasy);
+	timeLeftEasy = 15;
+	timerEasy.textContent = timeLeftEasy;
 	timerEasy.style.color = '#233C58';
-	matched = 0;
+	matchedEasy = 0;
 	firstCardEasy = null;
 	secondCardEasy = null;
 	resetBoard();
 	shuffleCards();
 	cardContainerEasy.innerHTML = '';
-	gameStarted = false;
+	gameStartedEasy = false;
 	generateCards();
 }
 
-window.restart = restart;
+window.currentRestart = restart;
