@@ -101,7 +101,7 @@ img {
 
 .modal-message {
   color: var(--light-blue);
-  font-size: 30px;
+  font-size: 2rem;
   margin: 20px 0;
 }
 
