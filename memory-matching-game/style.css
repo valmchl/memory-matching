@@ -141,7 +141,7 @@ img {
   cursor: pointer;
 }
 
-.m-20 {
+.m-40 {
   margin: 40px 0;
 }
 /***** End Modal Styles *****/
@@ -438,7 +438,21 @@ img {
 
   .game-container .memory-game.is-active {
   align-content: stretch;
-}
+  }
+
+  .modal-message.m-40 {
+    font-size: 1.1rem;
+  }
+
+  .timeup-restart, .win-restart {
+    font-size: 10px;
+  }
+
+  .close {
+    font-size: 19px;
+    top: 5%;
+    right: 5%;
+  }
 
 }
 
