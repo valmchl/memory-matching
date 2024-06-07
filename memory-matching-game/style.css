@@ -472,3 +472,18 @@ img {
     grid-template-rows: auto auto auto auto;
   }
 }
+
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
+  .close {
+    font-size: 25px;
+    top: 3.3%;
+    right: 5%;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .close {
+    top: 5%;
+    right: 4%;
+  }
+}
