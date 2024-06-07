@@ -16,7 +16,7 @@ import { initModals } from "./modals.js"; //import modals
 const { showTimeUpModal, showWinModal } = initModals();
 
 import { soundEffects } from "./sound-effects.js"; //import SFX
-const { buzzer, chord, pop, swipe, swoop, twinkle } = soundEffects();
+const { buzzer, chord, pop, swipe, swoop, twinkle, warning } = soundEffects();
 
 
 // Fetch archon card data from JSON
@@ -149,6 +149,7 @@ function updateTimer() {
 		// Change color of text based on time left
 		if (timeLeftEasy <= 5) {
 			timerEasy.style.color = 'red';
+			warning();
 		} else if (timeLeftEasy <= 10) {
 			timerEasy.style.color = 'orange';
 		} else {

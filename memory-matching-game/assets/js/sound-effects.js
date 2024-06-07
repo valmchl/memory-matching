@@ -8,6 +8,7 @@ function soundEffects() {
     const audioSwipe = new Audio('./assets/audio/se_swipe.mp3');
     const audioSwoop = new Audio('./assets/audio/se_swoop.mp3');
     const audioTwinkle = new Audio('./assets/audio/se_twinklesparkle.mp3');
+    const audioWarning = new Audio('./assets/audio/se_warning.mp3');
 
     // Buzzer SFX (when time runs out)
     function buzzer() {
@@ -48,6 +49,11 @@ function soundEffects() {
         audioTwinkle.play();
     }
 
+    // Warning SFX (when time is almost up)
+    function warning() {
+        audioWarning.play();
+    }
+
     return {
         buzzer,
         chord,
@@ -55,7 +61,8 @@ function soundEffects() {
         pop,
         swipe,
         swoop,
-        twinkle
+        twinkle,
+        warning
     };
 }
 

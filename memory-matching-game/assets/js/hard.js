@@ -17,7 +17,7 @@ import { initModals } from "./modals.js"; //import modals
 const { showTimeUpModal, showWinModal } = initModals();
 
 import { soundEffects } from "./sound-effects.js"; //import SFX
-const { buzzer, chord, pop, swipe, swoop, twinkle } = soundEffects();
+const { buzzer, chord, pop, swipe, swoop, twinkle, warning } = soundEffects();
 
 fetch("./data/characters.json")
     .then((res) => res.json())
@@ -156,6 +156,7 @@ function updateTimer() {
 
 		// Change color of text based on time left
 		if (timeLeftHard <= 15) {
+			warning();
 			timerHard.style.color = 'red';
 		} else if (timeLeftHard <= 30) {
 			timerHard.style.color = 'orange';
@@ -165,6 +166,7 @@ function updateTimer() {
 
 	} else if (timeLeftHard === 0) {
 		// If time runs out
+		buzzer();
 		clearInterval(timerIntervalHard);
 		showTimeUpModal();
 		window.currentRestart = restart;
