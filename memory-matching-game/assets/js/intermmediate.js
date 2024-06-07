@@ -12,8 +12,11 @@ let gameStartedInt = false;
 let timeLeftInt = 25;
 
 // Imports
-import { initModals } from "./modals.js";
+import { initModals } from "./modals.js"; //import modals
 const { showTimeUpModal, showWinModal } = initModals();
+
+import { soundEffects } from "./sound-effects.js"; //import SFX
+const { buzzer, chord, pop, swipe, swoop, twinkle } = soundEffects();
 
 fetch("./data/combat.json")
     .then((res) => res.json())
@@ -66,6 +69,8 @@ function startTimer() {
 //Flips a card and keeps it flipped
 function flipCard() {
 	startTimer();
+	swipe();
+
 	if (lockBoard) return;
 	if (this === firstCardInt) return;
 	this.classList.add('flip');
@@ -93,6 +98,7 @@ function disableCards() {
 	if (hasWon()) {
 		clearInterval(timerIntervalInt);
 		setTimeout(() => {
+			chord();
 			showWinModal();
 			window.currentRestart = restart;
 		}, 500)
@@ -104,6 +110,7 @@ function unflipCards() {
 	setTimeout(() => {
 		firstCardInt.classList.remove('flip');
 		secondCardInt.classList.remove('flip');
+		swoop();
 		resetBoard();
 	}, 700);
 }
@@ -124,7 +131,12 @@ function resetBoard() {
 function checkForMatch() {
 	let isMatch = firstCardInt.dataset.name === secondCardInt.dataset.name;
 
-	isMatch ? disableCards() : unflipCards();
+	if (isMatch) {
+		disableCards()
+		twinkle();
+	} else {
+		unflipCards()
+	}
 }
 
 // Countdown timer
@@ -154,6 +166,7 @@ function updateTimer() {
 // Restart Button and Function
 resetIntBtn.addEventListener('click', restart);
 function restart() {
+	pop();
 	clearInterval(timerIntervalInt);
 	timeLeftInt = 25;
 	timerInt.textContent = timeLeftInt;

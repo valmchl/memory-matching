@@ -72,6 +72,10 @@ img {
 
 
 /***** Modal Styles *****/
+.small {
+  font-size: 1rem;
+}
+
 .modal {
     display: none; 
     position: fixed;
@@ -103,6 +107,11 @@ img {
   color: var(--light-blue);
   font-size: 2rem;
   margin: 20px 0;
+  text-align: center;
+}
+
+.modal-message p:first-child {
+  margin-bottom: 15px;
 }
 
 .close {
@@ -119,6 +128,17 @@ img {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.timeup-restart {
+  background-color: var(--dark-blue);
+  padding: 10px 25px;
+  margin: 5px 0;
+  font-size: 15px;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
 }
 /***** End Modal Styles *****/
 

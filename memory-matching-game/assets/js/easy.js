@@ -12,12 +12,11 @@ let gameStartedEasy = false;
 let timeLeftEasy = 15;
 
 // Imports
-
 import { initModals } from "./modals.js"; //import modals
-const { showTimeUpModal, showWinModal, closeModals } = initModals();
+const { showTimeUpModal, showWinModal } = initModals();
 
 import { soundEffects } from "./sound-effects.js"; //import SFX
-const { pop, swipe, swoop, twinkle } = soundEffects();
+const { buzzer, chord, pop, swipe, swoop, twinkle } = soundEffects();
 
 
 // Fetch archon card data from JSON
@@ -73,6 +72,7 @@ function startTimer() {
 function flipCard() {
 	startTimer();
 	swipe();
+
 	if (lockBoard) return;
 	if (this === firstCardEasy) return;
 	this.classList.add('flip');
@@ -99,8 +99,9 @@ function disableCards() {
 	if (hasWon()) {
 		clearInterval(timerIntervalEasy);
 		setTimeout(() => {
-			window.currentRestart = restart;
+			chord();
 			showWinModal();
+			window.currentRestart = restart;
 		}, 500);
 	}
 }
@@ -154,6 +155,7 @@ function updateTimer() {
 			timerEasy.style.color = '#233C58';
 		}
 	} else if (timeLeftEasy === 0) {
+		buzzer();
 		clearInterval(timerIntervalEasy);
 		window.currentRestart = restart;
 		showTimeUpModal();
