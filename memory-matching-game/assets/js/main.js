@@ -1,3 +1,5 @@
+import { soundEffects } from "./sound-effects.js";
+const { click } = soundEffects();
 
 // Toggle Game Difficulty
 window.onload = () => {
@@ -10,6 +12,7 @@ window.onload = () => {
 
         // toggle text color for current difficulty level when clicked
         tab_switcher.addEventListener('click', () => {
+            click();
             document.querySelector('.options .level.current-level').classList.remove('current-level');
             tab_switcher.parentNode.classList.add('current-level');
 

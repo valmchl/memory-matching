@@ -13,7 +13,10 @@ let timeLeftEasy = 15;
 
 // Imports
 import { initModals } from "./modals.js";
+import { soundEffects } from "./sound-effects.js";
+
 const { showTimeUpModal, showWinModal, closeModals } = initModals();
+const { click } = soundEffects();
 
 // Fetch archon card data from JSON
 fetch('./data/archons.json')
