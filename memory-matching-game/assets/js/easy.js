@@ -12,11 +12,13 @@ let gameStartedEasy = false;
 let timeLeftEasy = 15;
 
 // Imports
-import { initModals } from "./modals.js";
-import { soundEffects } from "./sound-effects.js";
 
+import { initModals } from "./modals.js"; //import modals
 const { showTimeUpModal, showWinModal, closeModals } = initModals();
-const { click } = soundEffects();
+
+import { soundEffects } from "./sound-effects.js"; //import SFX
+const { pop, swipe, swoop, twinkle } = soundEffects();
+
 
 // Fetch archon card data from JSON
 fetch('./data/archons.json')
@@ -70,6 +72,7 @@ function startTimer() {
 // Flips a card and keeps it flipped
 function flipCard() {
 	startTimer();
+	swipe();
 	if (lockBoard) return;
 	if (this === firstCardEasy) return;
 	this.classList.add('flip');
@@ -107,6 +110,7 @@ function unflipCards() {
 	setTimeout(() => {
 		firstCardEasy.classList.remove('flip');
 		secondCardEasy.classList.remove('flip');
+		swoop();
 		resetBoard();
 	}, 700);
 }
@@ -127,7 +131,12 @@ function resetBoard() {
 function checkForMatch() {
 	let isMatch = firstCardEasy.dataset.name === secondCardEasy.dataset.name;
 
-	isMatch ? disableCards() : unflipCards();
+	if (isMatch) {
+		disableCards()
+		twinkle();
+	} else {
+		unflipCards()
+	}
 }
 
 // Countdown timer
@@ -154,6 +163,7 @@ function updateTimer() {
 // Restart Button and Function
 resetEasyBtn.addEventListener('click', restart);
 function restart() {
+	pop();
 	clearInterval(timerIntervalEasy);
 	timeLeftEasy = 15;
 	timerEasy.textContent = timeLeftEasy;
